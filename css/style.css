@@ -1,0 +1,38 @@
+body {
+	margin: 0 auto;
+	padding: 0;
+}
+
+header {
+	background-color: #f9f9f9;
+	border: 1px solid;
+}
+
+.menu ul {
+	list-style: none;
+	text-align: center;
+}
+
+.menu ul li {
+	display: inline-block;
+	margin: 15px;
+	font-size: 20px;
+	padding-right: 45px;
+}
+
+.menu ul li a {
+	text-decoration: none;
+	color: #0f0f0f;
+}
+
+
+.menu ul li a:hover {
+	text-decoration: none;
+	color: #00b3bf;
+	transition: 0.3s;
+}
+
+.menu .number a:hover {
+	color: #40f;
+	transition: 0.5s;
+}

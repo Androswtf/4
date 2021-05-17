@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=1200, initial-scale=1.0">
+	<title>Тест 3д модели</title>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+	
+	<header>
+		<div class="menu">
+			<ul>
+				<li><a href="index.html"><img src="img/logo.png" alt="logo"></a></li>
+				<li><a href="">Главная</a></li>
+				<li><a href="">Услуги</a></li>
+				<li><a href="">Этапы работ</a></li>
+				<li><a href="">Контакты</a></li>
+				<li class="number"><a href="">8 (800) 555 35 35</a></li>
+			</ul>
+		</div>
+	</header>
+
+	<section>
+		<div class="model">
+			
+		</div>
+	</section>
+
+	<script src="OrbitControls.js"></script>
+	<script src="GLTFLoader.js"></script>
+	<script src="Three.js"></script>
+    <script>
+  	
+    	import * as THREE from 'three';
+    	window.onload = () => {
+    		let w = innerWidth,
+    		h = innerHeight;
+    		const camera = new THREE.PerspectiveCamera(75, w/h, 0.1, 2000);
+    		camera.position.set(0,0,0);
+    		const scene = new THREE.Scene();
+
+    		const renderer = new THREE.WebGLRenderer({
+    			antialias: true,
+    	});
+    	renderer.shadowMap.enabled = true;
+    	renderer.shadowMap.type = THREE.PCFShadowMap;
+
+    	renderer.setSize(w,h);
+
+    	document.body.appendChild(renderer.domElement);
+
+    	let light = new THREE.DirectionalLight(0xffffff, 1);
+    	light.castShadow = true;
+    	scene.add(light);
+    	light.position.set(0, 10, -5);
+
+    	let geom = new THREE.BoxGeometry(1, 1, 1, 1, 1, 1);
+    	let material = new THREE.MeshBasicMaterial({
+    		color 'red'
+    	})
+
+    	let cube = new THREE.Mesh(geom, material);
+    	cube.position.setZ(-4);
+    	cube.castShadow = true;
+    	cube.receiveShadow = true;
+
+    	let planeGeom = new THREE.PlaneGeometry(4, 4);
+    	let planeMat = new THREE.MeshStandardMaterial({
+    		color: 0xffffff,
+    		side: THREE.DoubleSide
+    	});
+
+    	let plane = new THREE.Mesh(planeGeom, planeMat);
+
+    	plane.rotateX(2);
+    	plane.position.set(0, -.6, -4);
+
+    	plane.castShadow = false;
+    	plane.receiveShadow = true;
+
+    	scene.add(cube);
+    	scene.add(plane);
+
+    	renderer.setClearColor(0x000000);
+    	camera.lookAt(0,0,-4);
+
+    	function loop() {
+    		cube.rotateX(.01);
+    		renderer.clear();
+    		renderer.render(scene, camera);
+
+    		requestAnimationFrame(loop);
+    	}
+
+    	loop();
+
+    </script>
+
+</body>
+</html>
